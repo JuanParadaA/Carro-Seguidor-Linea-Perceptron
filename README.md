@@ -6,7 +6,7 @@ Realizado por Miguel Henao, Juan Parada, Manuel Gamboa.
 ## 📋 Requisitos de Hardware
 - **Microcontrolador**: Raspberry Pi Pico
 - **Cámara**: Módulo OV7670 (configuración RGB565/YUV)
-- **Motores**: 2x DC Motors + Driver L298N
+- **Motores**: 2x Motores DC + Driver L298N
 - **Alimentación**: Batería 5V-9V
 - **Conexiones**: Protoboard y cables GPIO
 
