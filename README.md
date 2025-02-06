@@ -1,5 +1,5 @@
 # Carro Seguidor de Linea con Perceptron
-Proyecto de un robot seguidor de línea que utiliza una cámara OV7670 (30x40 píxeles) y un perceptrón simple para ajuste adaptativo de velocidad/dirección. Desarrollado para Raspberry Pi Pico.
+Proyecto de un carro seguidor de línea que utiliza una cámara OV7670 (30x40 píxeles) y un perceptrón simple para ajuste adaptativo de velocidad/dirección. Desarrollado para Raspberry Pi Pico.
 
 Realizado por Miguel Henao, Juan Parada, Manuel Gamboa.
 
