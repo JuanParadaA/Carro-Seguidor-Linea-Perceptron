@@ -12,3 +12,5 @@ Proyecto de un robot seguidor de línea que utiliza una cámara OV7670 (30x40 p�
 1. Clone el repositorio:
    ```bash
    git clone https://github.com/tu_usuario/line-follower-robot.git
+   ```
+Realizado por Miguel Henao, Juan Parada, Manuel Gamboa.
