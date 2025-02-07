@@ -13,5 +13,5 @@ Realizado por Miguel Henao, Juan Parada, Manuel Gamboa.
 ## ⚙️ Instalación
 1. Clone el repositorio:
    ```bash
-   git clone https://github.com/tu_usuario/line-follower-robot.git
+   git clone https://github.com/JuanParadaA/Carro-Seguidor-Linea-Perceptron.git
    ```
