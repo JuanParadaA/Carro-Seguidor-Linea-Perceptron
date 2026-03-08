@@ -186,7 +186,7 @@ response = """<!DOCTYPE html>
 
     <button class="stop"
         onclick="send('/detener')">
-        STOP
+        PARAR
     </button>
 
     <button
