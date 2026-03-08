@@ -108,170 +108,99 @@ while True:
     
     # Respuesta HTTP
     response = """<!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Animación 3D - Botones en la cara 5 del cubo</title>
+    <title>Robot Controller</title>
+
     <style>
+
         body {
-            margin: 0;
-            overflow: hidden;
             font-family: Arial, sans-serif;
+            background: #111;
+            color: white;
+            text-align: center;
+            margin: 0;
         }
-        #canvas-container {
-            width: 100%;
-            height: 100vh;
-            position: absolute;
-            top: 0;
-            left: 0;
+
+        h1 {
+            margin-top: 20px;
         }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 70vh;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 100px 100px 100px;
+            grid-template-rows: 100px 100px 100px;
+            gap: 15px;
+        }
+
+        button {
+            font-size: 18px;
+            border: none;
+            border-radius: 15px;
+            background: #e63946;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:active {
+            background: #ff6b6b;
+        }
+
+        .stop {
+            background: white;
+            color: black;
+            font-weight: bold;
+        }
+
     </style>
 </head>
+
 <body>
-    <div id="canvas-container"></div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <h1>Robot WiFi</h1>
+    <p>Control del Carro</p>
+
+    <div class="container">
+
+        <div class="grid">
+
+            <div></div>
+            <button onclick="send('/avanzar')">↑</button>
+            <div></div>
+
+            <button onclick="send('/izquierda')">←</button>
+            <button class="stop" onclick="send('/detener')">STOP</button>
+            <button onclick="send('/derecha')">→</button>
+
+            <div></div>
+            <button onclick="send('/retroceder')">↓</button>
+            <div></div>
+
+        </div>
+
+    </div>
+
     <script>
-        // Crear la escena
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer();
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        document.getElementById('canvas-container').appendChild(renderer.domElement);
 
-        // Crear un canvas para todos los botones en una cara del cubo
-        const createButtonsTexture = () => {
-            const canvas = document.createElement('canvas');
-            canvas.width = 256;
-            canvas.height = 256;
-            const context = canvas.getContext('2d');
-
-            // Fondo del canvas
-            context.fillStyle = '#222';
-            context.fillRect(0, 0, canvas.width, canvas.height);
-
-            // Estilo para los botones
-            context.fillStyle = '#28a745';
-            context.font = '20px Arial';
-            context.textAlign = 'center';
-            context.fillStyle = '#fff';
-
-            // Dibujar el botón "Adelante"
-            context.fillStyle = '#a22020';
-            context.fillRect(85, 40, 90, 30);
-            context.fillStyle = '#fff';
-            context.fillText('Avanzar', 130, 60);
-
-            // Dibujar el botón "Atrás"
-            context.fillStyle = '#a22020';
-            context.fillRect(90, 160, 80, 30);
-            context.fillStyle = '#fff';
-            context.fillText('Atrás', 130, 180);
-
-            // Dibujar el botón "Izquierda"
-            context.fillStyle = '#a22020';
-            context.fillRect(35, 100, 90, 30);
-            context.fillStyle = '#fff';
-            context.fillText('Izquierda', 80, 120);
-
-            // Dibujar el botón "Derecha"
-            context.fillStyle = '#a22020';
-            context.fillRect(135, 100, 90, 30);
-            context.fillStyle = '#fff';
-            context.fillText('Derecha', 180, 120);
-            
-            // Dibujar el botón "Detenerse"
-            context.fillStyle = '#ffffff';
-            context.fillRect(80, 210, 100, 32);
-            context.fillStyle = '#000';
-            context.fillText('Detenerse', 130, 233);
-
-            return new THREE.CanvasTexture(canvas);
-        };
-
-        // Crear materiales para las caras del cubo
-        const materials = [
-            new THREE.MeshBasicMaterial({ color: 0x9d0909 }), // Cara 1
-            new THREE.MeshBasicMaterial({ color: 0x9d0909 }), // Cara 2
-            new THREE.MeshBasicMaterial({ color: 0x9d0909 }), // Cara 3
-            new THREE.MeshBasicMaterial({ color: 0x9d0909 }), // Cara 4
-            new THREE.MeshBasicMaterial({ map: createButtonsTexture() }), // Cara 5 (Superior)
-            new THREE.MeshBasicMaterial({ color: 0xa22020 })  // Cara 6
-        ];
-
-        // Crear el cubo con geometría aplanada
-        const geometry = new THREE.BoxGeometry(5, 5, 0.2);
-        const flattenedCube = new THREE.Mesh(geometry, materials);
-        scene.add(flattenedCube);
-
-        // Posicionar la cámara
-        camera.position.z = 4;
-        camera.position.x = 0;
-        camera.position.y = 0;
-
-        // Variables de control para rotar el cubo
-        let rotateX = 0.0;
-        let rotateY = 0.01;
-
-        // Animar la escena
-        function animate() {
-            requestAnimationFrame(animate);
-
-            // Rotar el cubo
-            flattenedCube.rotation.x = rotateX;
-            flattenedCube.rotation.y += rotateY;
-
-            // Renderizar la escena
-            renderer.render(scene, camera);
+        function send(cmd) {
+            fetch(cmd)
         }
-        animate();
 
-        // Ajustar el renderizado cuando la ventana cambia de tamaño
-        window.addEventListener('resize', () => {
-            const width = window.innerWidth;
-            const height = window.innerHeight;
-            renderer.setSize(width, height);
-            camera.aspect = width / height;
-            camera.updateProjectionMatrix();
-        });
-
-        // Detectar clics en las texturas del cubo
-        window.addEventListener('click', (event) => {
-            const mouse = new THREE.Vector2(
-                (event.clientX / window.innerWidth) * 2 - 1,
-                -(event.clientY / window.innerHeight) * 2 + 1
-            );
-            const raycaster = new THREE.Raycaster();
-            raycaster.setFromCamera(mouse, camera);
-            const intersects = raycaster.intersectObject(flattenedCube);
-
-            if (intersects.length > 0) {
-                const uv = intersects[0].uv;  // Coordenadas UV del punto clicado
-                const faceIndex = intersects[0].face.materialIndex;
-
-                if (faceIndex === 4) {  // La cara 5 con los botones
-                    // Coordenadas UV mapeadas en el canvas (entre 0 y 1)
-                    const u = uv.x;
-                    const v = uv.y;
-
-                    if (u > 0.35 && u < 0.65 && v > 0.7 && v < 0.8) {
-                        window.location.href = '/avanzar'; // Redireccionar a la ruta de avanzar
-                    } else if (u > 0.35 && u < 0.65 && v > 0.3 && v < 0.4) {
-                        window.location.href = '/atras'; // Redireccionar a la ruta de atrás
-                    } else if (u > 0.15 && u < 0.35 && v > 0.5 && v < 0.6) {
-                        window.location.href = '/izquierda'; // Redireccionar a la ruta de izquierda
-                    } else if (u > 0.65 && u < 0.85 && v > 0.5 && v < 0.6) {
-                        window.location.href = '/derecha'; // Redireccionar a la ruta de derecha
-                    } else if (u > 0.30 && u < 0.7 && v > 0.04 && v < 0.3) {
-                        window.location.href = '/detenerse'; // Redireccionar a la ruta de detenerse
-                    }
-                }
-            }
-        });
     </script>
+
 </body>
-</html>"""
+
+</html>
+"""
 
 
 
