@@ -107,7 +107,7 @@ while True:
         mostrar_en_pantalla("DETENIENDO", wlan.ifconfig()[0])
     
     # Respuesta HTTP
-    response = """<!DOCTYPE html>
+response = """<!DOCTYPE html>
 <html>
 
 <head>
@@ -143,7 +143,7 @@ while True:
         }
 
         button {
-            font-size: 18px;
+            font-size: 22px;
             border: none;
             border-radius: 15px;
             background: #e63946;
@@ -174,15 +174,48 @@ while True:
         <div class="grid">
 
             <div></div>
-            <button onclick="send('/avanzar')">↑</button>
+
+            <button
+                onmousedown="send('/avanzar')"
+                onmouseup="send('/detener')"
+                ontouchstart="send('/avanzar')"
+                ontouchend="send('/detener')">
+                ↑
+            </button>
+
             <div></div>
 
-            <button onclick="send('/izquierda')">←</button>
-            <button class="stop" onclick="send('/detener')">STOP</button>
-            <button onclick="send('/derecha')">→</button>
+            <button
+                onmousedown="send('/izquierda')"
+                onmouseup="send('/detener')"
+                ontouchstart="send('/izquierda')"
+                ontouchend="send('/detener')">
+                ←
+            </button>
+
+            <button class="stop"
+                onclick="send('/detener')">
+                STOP
+            </button>
+
+            <button
+                onmousedown="send('/derecha')"
+                onmouseup="send('/detener')"
+                ontouchstart="send('/derecha')"
+                ontouchend="send('/detener')">
+                →
+            </button>
 
             <div></div>
-            <button onclick="send('/retroceder')">↓</button>
+
+            <button
+                onmousedown="send('/retroceder')"
+                onmouseup="send('/detener')"
+                ontouchstart="send('/retroceder')"
+                ontouchend="send('/detener')">
+                ↓
+            </button>
+
             <div></div>
 
         </div>
@@ -201,10 +234,4 @@ while True:
 
 </html>
 """
-
-
-
-    cl.send('HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n')
-    cl.send(response)
-    cl.close()
 
