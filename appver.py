@@ -164,52 +164,52 @@ response = """<!DOCTYPE html>
 
         <div class="grid">
 
-            <div></div>
+    <div></div>
 
-            <button
-                onmousedown="send('/avanzar')"
-                onmouseup="send('/detener')"
-                ontouchstart="send('/avanzar')"
-                ontouchend="send('/detener')">
-                ↑
-            </button>
+    <button
+        onmousedown="send('/avanzar')"
+        onmouseup="send('/detener')"
+        ontouchstart="send('/avanzar')"
+        ontouchend="send('/detener')">
+        &uarr;
+    </button>
 
-            <div></div>
+    <div></div>
 
-            <button
-                onmousedown="send('/izquierda')"
-                onmouseup="send('/detener')"
-                ontouchstart="send('/izquierda')"
-                ontouchend="send('/detener')">
-                ←
-            </button>
+    <button
+        onmousedown="send('/izquierda')"
+        onmouseup="send('/detener')"
+        ontouchstart="send('/izquierda')"
+        ontouchend="send('/detener')">
+        &larr;
+    </button>
 
-            <button class="stop"
-                onclick="send('/detener')">
-                PARAR
-            </button>
+    <button class="stop"
+        onclick="send('/detener')">
+        STOP
+    </button>
 
-            <button
-                onmousedown="send('/derecha')"
-                onmouseup="send('/detener')"
-                ontouchstart="send('/derecha')"
-                ontouchend="send('/detener')">
-                →
-            </button>
+    <button
+        onmousedown="send('/derecha')"
+        onmouseup="send('/detener')"
+        ontouchstart="send('/derecha')"
+        ontouchend="send('/detener')">
+        &rarr;
+    </button>
 
-            <div></div>
+    <div></div>
 
-            <button
-                onmousedown="send('/retroceder')"
-                onmouseup="send('/detener')"
-                ontouchstart="send('/retroceder')"
-                ontouchend="send('/detener')">
-                ↓
-            </button>
+    <button
+        onmousedown="send('/retroceder')"
+        onmouseup="send('/detener')"
+        ontouchstart="send('/retroceder')"
+        ontouchend="send('/detener')">
+        &darr;
+    </button>
 
-            <div></div>
+    <div></div>
 
-        </div>
+</div>
 
     </div>
 
