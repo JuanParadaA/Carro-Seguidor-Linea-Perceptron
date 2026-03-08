@@ -5,7 +5,6 @@ from machine import Pin, PWM, I2C
 import time
 import ssd1306
 
-# Configuración de los pines del motor
 in1_left = Pin(8, Pin.OUT)
 in2_left = Pin(9, Pin.OUT)
 en_left = PWM(Pin(6))
@@ -16,19 +15,16 @@ in2_right = Pin(5, Pin.OUT)
 en_right = PWM(Pin(7))
 en_right.freq(1000)
 
-# Configuración de la pantalla OLED
-i2c = I2C(0, scl=Pin(17), sda=Pin(16))  # Ajusta los pines si es necesario
+i2c = I2C(0, scl=Pin(17), sda=Pin(16)) 
 oled = ssd1306.SSD1306_I2C(128, 32, i2c)
 
-# Función para actualizar la pantalla OLED
 def mostrar_en_pantalla(comando, ip=None):
-    oled.fill(0)  # Limpiar pantalla
-    oled.text(comando, 0, 0)  # Mostrar comando
+    oled.fill(0) 
+    oled.text(comando, 0, 0) 
     if ip:
-        oled.text(ip, 0, 10)  # Mostrar IP en la segunda línea
+        oled.text(ip, 0, 10) 
     oled.show()
 
-# Funciones de control de los motores
 def control_left_motor(direction, speed):
     if direction == "forward":
         in1_left.value(1)
@@ -51,8 +47,7 @@ def stop_motors():
     control_left_motor("forward", 0)
     control_right_motor("forward", 0)
 
-# Conectando a la red WiFi
-ssid = 'perrito32'
+ssid = 'Carro'
 password = '12345678'
 wlan = network.WLAN(network.STA_IF)
 
@@ -65,18 +60,16 @@ def conectar_wifi():
     
     ip = wlan.ifconfig()[0]
     print('Conexión establecida, IP:', ip)
-    mostrar_en_pantalla(f'IP: {ip}', ip)  # Mostrar IP en la pantalla OLED
+    mostrar_en_pantalla(f'IP: {ip}', ip)
 
 conectar_wifi()
 
-# Configuración del servidor
 address = socket.getaddrinfo('0.0.0.0', 80)[0][-1]
 s = socket.socket()
 s.bind(address)
 s.listen(1)
 print('Servidor escuchando en', address)
 
-# Bucle principal del servidor
 while True:
     cl, addr = s.accept()
     print('Conexión desde', addr)
@@ -85,7 +78,6 @@ while True:
 
     print("Solicitud recibida:", request)
 
-    # Manejamos las solicitudes
     if 'GET /avanzar' in request:
         control_left_motor("forward", 0.55)
         control_right_motor("forward", 0.6)
@@ -106,7 +98,6 @@ while True:
         stop_motors()
         mostrar_en_pantalla("DETENIENDO", wlan.ifconfig()[0])
     
-    # Respuesta HTTP
 response = """<!DOCTYPE html>
 <html>
 
