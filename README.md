@@ -13,6 +13,7 @@ The system is built around a Raspberry Pi Pico and integrates embedded processin
 - Smartphone compatibility for robot control
 - LED display showing system status and connection IP
 - Dual operating modes (autonomous and manual)
+- AI implementation with perceptron to correct line tracking
 
 ---
 
